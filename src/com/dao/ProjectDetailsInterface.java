@@ -11,5 +11,7 @@ public interface ProjectDetailsInterface {
 	public List<ProjectDetails> getProjectDetails();
 	//This method retrieves list of project tasks
 	public List<ProjectTasks> getProjectTasks(int projectNo);
+	//This method to check if project can be completed on time
+	public boolean getProjectCompletionStatus(List<ProjectTasks> projectTasks,String startDate,String endDate);
 
 }

@@ -14,6 +14,19 @@
 <%@page import="java.util.Iterator"%> 
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.util.Date"%>
+<script type="text/javascript">
+var Msg ='<%=request.getAttribute("getAlert")%>';
+ if (Msg != "null") {
+	 function alertName(){
+		 var Msg1 ='<%=request.getAttribute("showSuccess")%>';
+		 if (Msg != "Yes") {
+				 alert("Project can be completed on time");
+		 }
+				 else
+					 alert("Project cannot be completed on time"); 
+	 } 
+ }
+ </script>
 <%
  String projectName = request.getParameter("projectName");
 String projectNo = request.getParameter("projectNo");
@@ -34,14 +47,14 @@ ArrayList<ProjectTasks> projTasks = (ArrayList)session.getAttribute("projTasks")
     <th>Utilized Hours</th>
     <th>Remaining time</th>
     <th>Project Tasks Details</th>
-    <!-- <th>Start Date</th>
-    <th>End Date</th> -->
+    <th>Start Date</th>
+    <th>End Date</th> 
     
   </tr>
   <tr>
     <td><%=projectNo%></td>
     <td><%=projectName%></td>
-    <td><input type="text" value =<%=duration%> name="duration"/><br/><br/> </td>
+    <td><%=duration%><br/><br/> </td>
     <td><%=utilizedHours%></td>
     <td><%=remainingTime%></td>
     <td>
@@ -49,6 +62,7 @@ ArrayList<ProjectTasks> projTasks = (ArrayList)session.getAttribute("projTasks")
 	<tr>
     <th>Task Name</th>
     <th>Required Hours</th>
+    <th>Utilized Hours</th>
     <th>Resource Type</th>
   </tr>
    <%  if(projTasks != null)  // Null check for the object
@@ -68,6 +82,9 @@ ArrayList<ProjectTasks> projTasks = (ArrayList)session.getAttribute("projTasks")
 		<%=projTask.getRequiredHours()%>
 	</td>
 	<td>
+		<%=projTask.getUtilizedHours()%>
+	</td>
+	<td>
 		<%=projTask.getResourceType()%>
 	</td>
 	</tr>
@@ -78,13 +95,13 @@ ArrayList<ProjectTasks> projTasks = (ArrayList)session.getAttribute("projTasks")
 }
     %>
     </table>
+    <strong><a href="<%=request.getContextPath()%>/ProjectManagementServlet?type=getStatus&projectNo=<%=projectNo%>&startDate=<%=startDate%>&endDate=<%=endDate%>">Get Progress</a></strong> 
     </td>
-  <%--   <td><%=startDate%></td>
-    <td><%=endDate%></td> --%>
-    
+    <td><%=startDate%></td>
+    <td><%=endDate%></td> 
   </tr>
  
 </table>
-
+<script type="text/javascript"> window.onload = alertName; </script>
 </body>
 </html>

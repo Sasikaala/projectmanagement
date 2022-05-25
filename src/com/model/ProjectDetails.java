@@ -10,13 +10,13 @@ public class ProjectDetails {
 	private int duration;
 	private int utilizedHours;
 	private int remainingTime;
-	private Date startDate;
+	private LocalDate startDate;
 	private LocalDate endDate;
 	private List<ProjectTasks> tasks;
 	
 	
 	public ProjectDetails(int projectNo, String projectName, int duration, int utilizedHours, int remainingTime,
-			List<ProjectTasks> tasks,Date startDate,LocalDate endDate) {
+			List<ProjectTasks> tasks,LocalDate startDate,LocalDate endDate) {
 		super();
 		this.projectNo = projectNo;
 		this.projectName = projectName;
@@ -64,10 +64,10 @@ public class ProjectDetails {
 		this.tasks = tasks;
 	}
 	
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 	public LocalDate getEndDate() {
@@ -75,6 +75,12 @@ public class ProjectDetails {
 	}
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
+	}
+	@Override
+	public String toString() {
+		return "ProjectDetails [projectNo=" + projectNo + ", projectName=" + projectName + ", duration=" + duration
+				+ ", utilizedHours=" + utilizedHours + ", remainingTime=" + remainingTime + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", tasks=" + tasks + "]";
 	}
 
 }

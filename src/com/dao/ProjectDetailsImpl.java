@@ -1,6 +1,7 @@
 package com.dao;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,14 +15,13 @@ public class ProjectDetailsImpl implements ProjectDetailsInterface {
 	
 	@Override
 	public List<ProjectDetails> getProjectDetails() {
-		//set employee values
-	
-		
+		System.out.println("getProjectDetails");
 		//Set project details	
-		LocalDate futureDate = LocalDate.now().plusMonths(1);
+		LocalDate startDate = LocalDate.now().minusDays(3);
+		LocalDate endDate = LocalDate.now().plusMonths(1);
 		List<ProjectTasks> projectTasks = getProjectTasks(1991);
-		ProjectDetails proj = new ProjectDetails(1991, "Hotel Management",getTotalProjectHours(projectTasks), 10, 110, projectTasks,new Date(),futureDate);
-		
+		ProjectDetails proj = new ProjectDetails(1991, "Hotel Management",getTotalProjectHours(projectTasks), getUtilizedHours(projectTasks), getRemainingHours(projectTasks), projectTasks,startDate,endDate);
+		System.out.println(proj);
 		List<ProjectDetails> projectsList = new ArrayList<ProjectDetails>();
 		
 		projectsList.add(proj);
@@ -68,9 +68,9 @@ public class ProjectDetailsImpl implements ProjectDetailsInterface {
 		
 		List<EmployeeDetails> empList3 =new ArrayList<EmployeeDetails>();
 		empList.add(emp4);
-		ProjectTasks projTask = new ProjectTasks(1001, 1991, "Room Booking", 40, "Java Developer", empList);
-		ProjectTasks projTask1= new ProjectTasks(1002, 1991, "Food Order", 30, "Java Developer", empList1);
-		ProjectTasks projTask2 = new ProjectTasks(1002, 1991, "Testing", 30, "Tester", empList3);
+		ProjectTasks projTask = new ProjectTasks(1001, 1991, "Room Booking", 40, "Java Developer", empList,5);
+		ProjectTasks projTask1= new ProjectTasks(1002, 1991, "Food Order", 30, "Java Developer", empList1,5);
+		ProjectTasks projTask2 = new ProjectTasks(1002, 1991, "Testing", 30, "Tester", empList3,5);
 		
 		
 		List<ProjectTasks> projectTasksList =new ArrayList<ProjectTasks>();
@@ -90,5 +90,31 @@ public class ProjectDetailsImpl implements ProjectDetailsInterface {
 		}
 		return totalHours;
 		}
+	public int getUtilizedHours(List<ProjectTasks> projectTasks) {
+		int totalHours=0;
+		for(ProjectTasks projectTask : projectTasks) {
+			totalHours+= projectTask.getUtilizedHours();
+		}
+		return totalHours;
+	}
+	
+	public int getRemainingHours(List<ProjectTasks> projectTasks) {
+		return getTotalProjectHours(projectTasks) - getUtilizedHours(projectTasks);
+	}
+	
+
+	@Override
+	public boolean getProjectCompletionStatus(List<ProjectTasks> projectTasks,String startDate,String endDate) {
+		LocalDate startdate1= LocalDate.parse(startDate);
+		LocalDate endDate1 = LocalDate.parse(endDate);
+		long noOfDaysBetween = ChronoUnit.DAYS.between(startdate1, endDate1);
+		double remainingHoursExists = noOfDaysBetween*8.0;
+		if(getRemainingHours(projectTasks)<remainingHoursExists) {
+		return true;
+		}
+		return false;
+	}
+
+	
 
 }

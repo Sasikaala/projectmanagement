@@ -34,7 +34,7 @@ if(request.getAttribute("projList") != null)  // Null check for the object
 		session.setAttribute("projTasks",projDetails.getTasks());
 	%>
 	
-		<tr><td><a href="jsp/projectData.jsp?projectNo=<%=projDetails.getProjectNo()%>&projectName=<%=projDetails.getProjectName()%>&duration=<%=projDetails.getDuration()%>&utilizedHours=<%=projDetails.getUtilizedHours()%>&remainingTime=<%=projDetails.getRemainingTime()%> "><%=projDetails.getProjectName()%></a></td>
+		<tr><td><a href="jsp/projectData.jsp?projectNo=<%=projDetails.getProjectNo()%>&projectName=<%=projDetails.getProjectName()%>&duration=<%=projDetails.getDuration()%>&utilizedHours=<%=projDetails.getUtilizedHours()%>&remainingTime=<%=projDetails.getRemainingTime()%>&startDate=<%=projDetails.getStartDate()%>&endDate=<%=projDetails.getEndDate()%>"><%=projDetails.getProjectName()%></a></td>
 		
 	</tr>
 	<%

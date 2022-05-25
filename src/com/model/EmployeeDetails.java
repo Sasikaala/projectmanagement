@@ -1,11 +1,18 @@
 package com.model;
 
-public class EmployeeDetails {
+import java.io.Serializable;
+
+public class EmployeeDetails implements Serializable{
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String employeeName;
 	private int employeeId;
 	private int projectNo;
+	private int utilizedHours;
 	public String getEmployeeName() {
 		return employeeName;
 	}
@@ -23,6 +30,12 @@ public class EmployeeDetails {
 	}
 	public void setProjectNo(int projectNo) {
 		this.projectNo = projectNo;
+	}
+	public int getUtilizedHours() {
+		return utilizedHours;
+	}
+	public void setUtilizedHours(int utilizedHours) {
+		this.utilizedHours = utilizedHours;
 	}
 
 }

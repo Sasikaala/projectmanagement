@@ -12,9 +12,10 @@ public class ProjectTasks implements Serializable{
 	private int projectNo;
 	private String taskName;
 	private int requiredHours;
+	private int utilizedHours;
 	private String resourceType;
 	private List<EmployeeDetails> projectMembers;
-	public ProjectTasks(int taskNo, int projectNo, String taskName, int requiredHours, String resourceType,List<EmployeeDetails> projectMembers) {
+	public ProjectTasks(int taskNo, int projectNo, String taskName, int requiredHours, String resourceType,List<EmployeeDetails> projectMembers,int utilizedHours) {
 		super();
 		this.taskNo = taskNo;
 		this.projectNo = projectNo;
@@ -22,6 +23,7 @@ public class ProjectTasks implements Serializable{
 		this.requiredHours = requiredHours;
 		this.resourceType = resourceType;
 		this.setProjectMembers(projectMembers);
+		this.utilizedHours = utilizedHours;
 	}
 	public int getTaskNo() {
 		return taskNo;
@@ -58,6 +60,12 @@ public class ProjectTasks implements Serializable{
 	}
 	public void setProjectMembers(List<EmployeeDetails> projectMembers) {
 		this.projectMembers = projectMembers;
+	}
+	public int getUtilizedHours() {
+		return utilizedHours;
+	}
+	public void setUtilizedHours(int utilizedHours) {
+		this.utilizedHours = utilizedHours;
 	}
 	
 
